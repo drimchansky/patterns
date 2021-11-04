@@ -58,7 +58,7 @@ class ProxySubject implements Subject {
 }
 
 /** */
-function clientCode(subject: Subject) {
+function clientCodeP(subject: Subject) {
     // ...
 
     subject.request()
@@ -68,10 +68,10 @@ function clientCode(subject: Subject) {
 
 console.log('Client: Executing the client code with a real subject:')
 const realSubject = new RealSubject()
-clientCode(realSubject)
+clientCodeP(realSubject)
 
 console.log('')
 
 console.log('Client: Executing the same client code with a proxy:')
 const proxy = new ProxySubject(realSubject)
-clientCode(proxy)
+clientCodeP(proxy)
