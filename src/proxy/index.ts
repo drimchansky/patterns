@@ -15,7 +15,7 @@
  */
 
 interface Subject {
-    request(): void;
+    request(): void
 }
 
 /** */

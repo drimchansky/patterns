@@ -3,15 +3,14 @@
  * an interface for creating objects in a superclass, but allows
  * subclasses to alter the type of objects that will be created.
  * 
- *  * Applicability:
+ * Applicability:
  * - Separates product construction code from the code that actually uses the product
  * - When you want to provide users of your library or framework with a way to extend its internal components
  * - Save system resources by reusing existing objects instead of rebuilding them each time
  */
 
-/** */
 interface Product {
-    operation(): string;
+    operation(): string
 }
 
 /** */
