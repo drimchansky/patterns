@@ -11,9 +11,9 @@
  */
 
  interface Builder {
-    producePartA(): void;
-    producePartB(): void;
-    producePartC(): void;
+    producePartA(): void
+    producePartB(): void
+    producePartC(): void
 }
 
 /** */
