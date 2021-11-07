@@ -1,0 +1,89 @@
+/**
+ * State is a behavioral design pattern that lets an object alter its
+ * behavior when its internal state changes. It appears as if the
+ * object changed its class.
+ * 
+ * Applicability:
+ * - When you have an object that behaves differently depending on its current state, the number of states is enormous, and the state-specific code changes frequently
+ * - When you have a class polluted with massive conditionals that alter how the class behaves according to the current values of the class’s fields
+ * - When you have a lot of duplicate code across similar states and transitions of a condition-based state machine
+ */
+
+/** */
+abstract class State {
+
+    protected context: Context
+
+    /** */
+    public setContext(context: Context) {
+        this.context = context
+    }
+
+    public abstract handle1(): void
+
+    public abstract handle2(): void
+}
+
+/** */
+class Context {
+
+    private state: State
+
+    /** */
+    constructor(state: State) {
+        this.transitionTo(state)
+    }
+
+    /** */
+    public transitionTo(state: State): void {
+        console.log(`Context: Transition to ${(<any>state).constructor.name}.`)
+        this.state = state
+        this.state.setContext(this)
+    }
+
+    /** */
+    public request1(): void {
+        this.state.handle1()
+    }
+
+    /** */
+    public request2(): void {
+        this.state.handle2()
+    }
+}
+
+/** */
+class ConcreteStateA extends State {
+
+    /** */
+    public handle1(): void {
+        console.log('ConcreteStateA handles request1.')
+        console.log('ConcreteStateA wants to change the state of the context.')
+        this.context.transitionTo(new ConcreteStateB())
+    }
+
+    /** */
+    public handle2(): void {
+        console.log('ConcreteStateA handles request2.')
+    }
+}
+
+/** */
+class ConcreteStateB extends State {
+
+    /** */
+    public handle1(): void {
+        console.log('ConcreteStateB handles request1.')
+    }
+
+    /** */
+    public handle2(): void {
+        console.log('ConcreteStateB handles request2.')
+        console.log('ConcreteStateB wants to change the state of the context.')
+        this.context.transitionTo(new ConcreteStateA())
+    }
+}
+
+const context = new Context(new ConcreteStateA())
+context.request1()
+context.request2()
